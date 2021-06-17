@@ -20,6 +20,7 @@ class Skill extends Main_Controller
 	{
 		$data['judul'] 	= 'X-MEN';
 		$data['skill'] 	= $this->model('Skill_model')->getSkillById($id);
+		$data['heroes'] = $this->model('Superhero_model')->getAllHeroes();
 		$data['herofromskill'] = $this->model('Skill_model')->getHeroesOfTheSkill($id);
 		
 		$this->view('templates/header', $data);
@@ -39,47 +40,41 @@ class Skill extends Main_Controller
 		$this->view('templates/footer');
 	}
 
-	public function tambah()
+	public function addhero() 
 	{
-		if ($this->model('Mahasiswa_model')->tambahDataMahasiswa($_POST) > 0) {
+		if ($this->model('Skill_model')->addHeroToSkill($_POST) > 0) {
 			Flasher::setFlash('berhasil', 'ditambahkan', 'success');
-			header('Location: ' . BASE_URL . '/mahasiswa');
+			header('Location: ' . BASE_URL . '/skill');
 			exit();
 		} else {
-			Flasher::setFlash('gagal', 'ditambahkan', 'danger');
-			header('Location: ' . BASE_URL . '/mahasiswa');
+			Flasher::setFlash('gagal ', 'ditambahkan', 'danger');
+			header('Location: ' . BASE_URL . '/skill');
 			exit();
 		}
 	}
 
-	public function hapus($id)
+	public function change() 
 	{
-		if ($this->model('Mahasiswa_model')->hapusDataMahasiswa($id) > 0) {
-			Flasher::setFlash('berhasil', 'dihapus', 'success');
-			header('Location: ' . BASE_URL . '/mahasiswa');
-			exit();
-		} else {
-			Flasher::setFlash('gagal', 'dihapus', 'danger');
-			header('Location: ' . BASE_URL . '/mahasiswa');
-			exit();
-		}
-	}
-
-	public function	getubah() 
-	{
-		// mengubah data array assosiatif ke bentuk json
-		echo json_encode($this->model('Mahasiswa_model')->getMahasiswaById($_POST['id']));
-	}
-
-	public function ubah() 
-	{
-		if ($this->model('Mahasiswa_model')->ubahDataMahasiswa($_POST) > 0) {
+		if ($this->model('Skill_model')->updateSkill($_POST) > 0) {
 			Flasher::setFlash('berhasil', 'diubah', 'success');
-			header('Location: ' . BASE_URL . '/mahasiswa');
+			header('Location: ' . BASE_URL . '/skill');
 			exit();
 		} else {
 			Flasher::setFlash('gagal', 'diubah', 'danger');
-			header('Location: ' . BASE_URL . '/mahasiswa');
+			header('Location: ' . BASE_URL . '/skill');
+			exit();
+		}
+	}
+
+	public function remove($id)
+	{
+		if ($this->model('Skill_model')->removeSkill($id) > 0) {
+			Flasher::setFlash('berhasil', 'dihapus', 'success');
+			header('Location: ' . BASE_URL . '/skill');
+			exit();
+		} else {
+			Flasher::setFlash('gagal', 'dihapus', 'danger');
+			header('Location: ' . BASE_URL . '/skill');
 			exit();
 		}
 	}

@@ -14,6 +14,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h3><?= $data['subjudul']; ?></h3>
+                <?php Flasher::flash(); ?>
             </div>
             <div class="col-md-4">
                 <form action="<?= BASE_URL; ?>/skill/find" method="post">

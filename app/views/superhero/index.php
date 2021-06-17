@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h3><?= $data['subjudul']; ?></h3>
+                <?php Flasher::flash(); ?>
             </div>
             <div class="col-md-4">
                 <form action="<?= BASE_URL; ?>/superhero/find" method="post">
@@ -53,7 +54,7 @@
                             <td><?= $hero['superhero_gender']?></td>
                             <td>
                                 <a href="<?= BASE_URL;?>/superhero/detail/<?= $hero['superhero_id']; ?>" class="btn btn-primary">View Detail</a>
-                                <button class="btn btn-danger">Hapus</button>
+                                <a href="<?= BASE_URL;?>/superhero/remove/<?= $hero['superhero_id']; ?>" class="btn btn-danger">Hapus</a>
                             </td>
                         </tr>
                     <?php $no++; ?>

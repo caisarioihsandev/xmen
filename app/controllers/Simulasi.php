@@ -5,15 +5,14 @@
  */
 class Simulasi extends Main_Controller
 {
-	public function index($nama = 'Ihsan', $pekerjaan = 'Pegawai' , $umur = 29) 
+	public function index() 
 	{
-		$data['nama'] = $nama;
-		$data['pekerjaan'] = $pekerjaan;
-		$data['umur'] = $umur;
-		$data['judul'] = 'About';
+		$data['judul'] 	= 'X-MEN';
+		$data['subjudul'] = 'Simulasi Jika Superhero Menikah';
+		$data['heroes'] = $this->model('Superhero_model')->getAllHeroes();
 
 		$this->view('templates/header', $data);
-		$this->view('about/index', $data);
+		$this->view('simulasi/index', $data);
 		$this->view('templates/footer');
 	}
 

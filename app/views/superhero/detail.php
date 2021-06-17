@@ -13,13 +13,14 @@
             </div>
         </div>
 
-
+        <!-- Form Untuk Edit -->
+        <form action="<?= BASE_URL; ?>/superhero/change" method="post">
         <div class="row">
             <div class="col-md-8">
                 <h3>Detail Superhero: <?= $data['hero']['superhero_name']; ?></h3>
             </div>
             <div class="col-md-4  text-right">
-                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-primary" type="submit">Edit</button>
             </div>
         </div>
         <div class="row">
@@ -27,12 +28,12 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>ID</td>
-                        <td><?= $data['hero']['superhero_id']; ?></td>
+                        <td><input type="text" name="id" id="id" class="form-control" value="<?= $data['hero']['superhero_id']; ?>"/></td>
                     </tr>
                     <tr>
                         <td>Nama</td>
                         <td>
-                            <input type="text" class="form-control" value="<?= $data['hero']['superhero_name']; ?>"/>
+                            <input type="text" name="name" id="name" class="form-control" value="<?= $data['hero']['superhero_name']; ?>"/>
                         </td>
                     </tr>
                     <tr>
@@ -45,13 +46,13 @@
                         </td>
                     </tr>
                 </table>
-
+        </form>
                 <table class="table table-bordered">
                     <thead>
                     <th>No</th>
                     <th>Skill</th>
                     <th>
-                        <button class="btn btn-primary btn-small">Tambah Skill</button>
+                        <button type="button" class="btn btn-primary tombolTambahData" data-toggle="modal" data-target="#formModal">Tambah Skill</button>
                     </th>
                     </thead>
                     <tbody>
@@ -81,7 +82,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="judulModal">Tambah Data Skill Hero: <?= $data[''];?></h5>
+        <h5 class="modal-title" id="judulModal">Tambah Data Skill Hero: <?= $data['hero']['superhero_name'];?></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -90,26 +91,22 @@
         
         <form action="<?= BASE_URL; ?>/superhero/addskill" method="post">
 
-            <input type="hidden" name="id" id="id">
-            
             <div class="form-group">
                 <label for="nama">ID</label>
                 <input type="text" class="form-control" id="id" name="id" value="<?= $data['hero']['superhero_id']; ?>" readonly>
             </div>
 
             <div class="form-group">
-                <label for="nrp">NRP</label>
-                <input type="number" class="form-control" id="nrp" name="nrp" value="<?= $data['hero']['superhero_name']; ?>" readonly>
+                <label for="nrp">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?= $data['hero']['superhero_name']; ?>" readonly>
             </div>
 
             <div class="form-group">
-                <label for="jurusan">Example select</label>
-                <select class="form-control" id="jurusan" name="jurusan">
-                  <option value="Matematika">Matematika</option>
-                  <option value="Teknik Informatika">Teknik Informatika</option>
-                  <option value="Teknik Mesin">Teknik Mesin</option>
-                  <option value="Teknik Pangan">Teknik Pangan</option>
-                  <option value="Teknik Lingkungan">Teknik Lingkungan</option>
+                <label for="skills">Tambahkan Untuk Skill Superhero</label>
+                <select class="form-control" id="skill" name="skill">
+                <?php foreach($data['skills'] as $skill): ?>
+                  <option value="<?= $skill['skill_id'];?>"><?= $skill['skill_name']; ?></option>
+                <?php endforeach ?>
                 </select>
             </div>
 

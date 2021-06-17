@@ -43,4 +43,46 @@ class Superhero_model
 		$this->db->bind('keyword', "%$keyword%");
 		return $this->db->resultSet();
 	}
+
+	public function updateHero($data)
+	{
+		$query = "UPDATE superhero SET 
+				superhero_name = :name,
+				superhero_gender = :gender 
+				WHERE superhero_id = :id";
+
+
+		$this->db->query($query);
+		$this->db->bind('name', $data['name']);
+		$this->db->bind('gender', $data['gender']);
+		$this->db->bind('id', $data['id']);
+
+		$this->db->execute();
+		
+		return $this->db->rowCount();
+	}
+
+	public function addSkillHero($data)
+	{
+		$query = "INSERT INTO matching_superhero_skill (superhero_id, skill_id) VALUES (:id, :skill)";
+
+		$this->db->query($query);
+		$this->db->bind('id', $data['id']);
+		$this->db->bind('skill', $data['skill']);
+
+		$this->db->execute();
+		
+		return $this->db->rowCount();
+	}
+
+	public function removeHero($id)
+	{
+		$query = "DELETE FROM " . $this->table . " WHERE superhero_id = :id";
+
+		$this->db->query($query);
+		$this->db->bind('id', $id);
+		$this->db->execute();
+		
+		return $this->db->rowCount();
+	}
 }

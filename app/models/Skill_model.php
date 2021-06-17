@@ -44,52 +44,43 @@ class Skill_model
 		return $this->db->resultSet();
 	}
 
-	// public function tambahDataMahasiswa($data)
-	// {
-	// 	$query = "INSERT INTO mahasiswa (nama, nrp, email, jurusan) VALUES (:nama, :nrp, :email, :jurusan)";
+	public function addHeroToSkill($data)
+	{
+		$query = "INSERT INTO matching_superhero_skill (superhero_id, skill_id) VALUES (:hero, :id)";
 
-	// 	$this->db->query($query);
-	// 	$this->db->bind('nama', $data['nama']);
-	// 	$this->db->bind('nrp', $data['nrp']);
-	// 	$this->db->bind('email', $data['email']);
-	// 	$this->db->bind('jurusan', $data['jurusan']);
+		$this->db->query($query);
+		$this->db->bind('hero', $data['hero']);
+		$this->db->bind('id', $data['id']);
 
-	// 	$this->db->execute();
+		$this->db->execute();
 		
-	// 	return $this->db->rowCount();
-	// }
+		return $this->db->rowCount();
+	}
+
+	public function updateSkill($data)
+	{
+		$query = "UPDATE skill SET 
+				skill_name = :name
+				WHERE skill_id = :id";
+
+
+		$this->db->query($query);
+		$this->db->bind('name', $data['name']);
+		$this->db->bind('id', $data['id']);
+
+		$this->db->execute();
+		
+		return $this->db->rowCount();
+	}
 	
-	// public function hapusDataMahasiswa($id)
-	// {
-	// 	$query = "DELETE FROM mahasiswa WHERE id = :id";
+	public function removeSkill($id)
+	{
+		$query = "DELETE FROM " . $this->table . " WHERE skill_id = :id";
 
-	// 	$this->db->query($query);
-	// 	$this->db->bind('id', $id);
-	// 	$this->db->execute();
+		$this->db->query($query);
+		$this->db->bind('id', $id);
+		$this->db->execute();
 		
-	// 	return $this->db->rowCount();
-	// }
-
-	// public function ubahDataMahasiswa($data)
-	// {
-	// 	$query = "UPDATE mahasiswa SET 
-	// 			nama = :nama,
-	// 			nrp = :nrp,
-	// 			email = :email,
-	// 			jurusan = :jurusan
-	// 			WHERE id = :id";
-
-	// 	$this->db->query($query);
-	// 	$this->db->bind('nama', $data['nama']);
-	// 	$this->db->bind('nrp', $data['nrp']);
-	// 	$this->db->bind('email', $data['email']);
-	// 	$this->db->bind('jurusan', $data['jurusan']);
-	// 	$this->db->bind('id', $data['id']);
-
-	// 	$this->db->execute();
-		
-	// 	return $this->db->rowCount();
-	// }
-
-	
+		return $this->db->rowCount();
+	}	
 }
